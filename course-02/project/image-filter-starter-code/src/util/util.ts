@@ -37,3 +37,11 @@ export async function deleteLocalFiles(files: Array<string>) {
     fs.unlinkSync(file);
   }
 }
+
+export function isValidUrl (url: string): boolean {
+  try {
+    return Boolean(new URL(url));
+  } catch (error) {
+    return false;
+  }
+}
