@@ -1,16 +1,16 @@
 export const config = {
   "dev": {
-    "username": "udagramkarimdev",
-    "password": "udagramkarimdev",
-    "database": "udagramkarimdev",
-    "host": "udagram-karim-dev-dev.us-east-1.elasticbeanstalk.com",
+    "username": process.env.POSTGRESS_USERNAME,
+    "password": process.env.POSTGRESS_PASSWORD,
+    "database": process.env.POSTGRESS_DATABASE,
+    "host": process.env.POSTGRESS_HOST,
     "dialect": "postgres",
-    "aws_region": "us-east-1",
-    "aws_profile": "default",
-    "aws_media_bucket": "udagram-karim-dev"
+    "aws_region": process.env.AWS_REGION,
+    "aws_profile": process.env.AWS_PROFILE,
+    "aws_media_bucket": process.env.AWS_MEDIA_BUCKET
   },
   "jwt": {
-    "secret": "helloworld"
+    "secret": process.env.JWT_SECRET
   },
   "prod": {
     "username": "",
