@@ -30,21 +30,26 @@ import {filterImageFromURL, deleteLocalFiles,isValidUrl} from './util/util';
   /**************************************************************************** */
 
   app.get( "/filteredimage", async ( req, res ) => {
-    const url : string = req.query.image_url;
-    const validUrl = isValidUrl(url);
-    if (!validUrl) {
-      return res.status(400).send("The provided url is not valid");
-    }
-    const filteredPath = await filterImageFromURL(url);
-    if (!filteredPath) {
-      return res.status(400).send
-      ("Unable to filter the image");
-    } else {
-      res.on('finish', function() {
-        deleteLocalFiles([filteredPath]);  
-      });
-    }
-    return res.status(200).sendFile(filteredPath);
+try {
+      const url : string = req.query.image_url;
+      const validUrl = isValidUrl(url);
+      if (!validUrl) {
+        return res.status(400).send("The provided url is not valid");
+      }
+      const filteredPath = await filterImageFromURL(url);
+      if (!filteredPath) {
+        return res.status(400).send
+        ("Unable to filter the image");
+      } else {
+        res.on('finish', function() {
+          deleteLocalFiles([filteredPath]);  
+        });
+      }
+      return res.status(200).sendFile(filteredPath);
+} catch (error) {
+  return res.status(500).send
+        ("Unable to process your request");
+}
   } );
 
   //! END @TODO1
